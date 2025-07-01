@@ -1,5 +1,5 @@
 const express = require("express");
-const {showAllApplicant} = require("../Controllers/Auth");
+const {showAllApplicant} = require("../Controllers/dashboard.controller.js");
 
 const router = express.Router();
 
