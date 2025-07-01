@@ -10,6 +10,7 @@ const applicantRouter = require("./Routes/applicant.route");
 
 
 const app = express();
+conectionDatabase();
 
 app.options('*', cors({
   origin: process.env.FRONTEND,  
