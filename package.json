@@ -1,12 +1,42 @@
 {
+  "name": "mantrahire-backend",
+  "version": "1.0.0",
+  "description": "Backend server for MantraHire Solutions using Express, MongoDB, Supabase, and JWT authentication.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "express",
+    "mongodb",
+    "supabase",
+    "api",
+    "backend",
+    "multer",
+    "jwt"
+  ],
+  "author": "Gaurav Phule",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GauravPhule23/MantraHire-Solutions---Backend-V1-"
+  },
+  "bugs": {
+    "url": "https://github.com/GauravPhule23/MantraHire-Solutions---Backend-V1-/issues"
+  },
+  "homepage": "https://github.com/GauravPhule23/MantraHire-Solutions---Backend-V1-#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^2.50.2",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
-    "dotenv": "^17.0.0",
+    "dotenv": "^17.0.1",
     "express": "^5.1.0",
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.16.1",
-    "multer": "^2.0.1",
+    "multer": "^2.0.1"
+  },
+  "devDependencies": {
     "nodemon": "^3.1.10"
   }
 }
