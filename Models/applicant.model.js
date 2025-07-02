@@ -16,7 +16,7 @@ const applicantScheema = new  mongoose.Schema({
   jobType : {type:String, required:true, enum:["Job","Internship","Both"], default:"Both"},
   location : {type:String, required:true, enum:["WFH","In-Office", "Both"], default:"Both"},
   resume : {type:String, required:true},
-  domain : {type:String, required}
+  domain : {type:String, required:true}
 })
 
 const Applicant = mongoose.model("Applicant",applicantScheema);

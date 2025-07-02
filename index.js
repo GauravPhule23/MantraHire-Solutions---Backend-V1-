@@ -2,11 +2,11 @@ const express = require("express");
 require('dotenv').config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const checkToken = require("./Midelware/auth");
+const checkToken = require("./Middlewares/auth.middleware.js");
 const { conectionDatabase } = require("./connection");
 
 
-const applicantRouter = require("./Routes/applicant.route");
+const applicantRouter = require("./Routes/applicant.route.js");
 
 
 const app = express();
