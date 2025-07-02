@@ -7,8 +7,11 @@ async function applicantRegister(req,res){
   try{
     const {fullName, email, phone, jobType, location, domain} = req.body;
     for (let [key, value] of Object.entries({fullName, email, phone, jobType, location, domain})) if (!value) return res.status(400).json(new apiError(400,`${key} not available`,`${key} not available`));
-    const resumeLocalPath = req.file?.path;
-    const resume = supabaseUrl(resumeLocalPath);
+    if(!req.file){
+      res.status(400).json(new apiError(400,"please submit resume","please submit resume"));
+    }
+    // const resumeLocalPath = req.file?.path;
+    const resume = supabaseUrl(req.file,fullName);
 
     const newApplicant = await Applicant.create({
       fullName,
