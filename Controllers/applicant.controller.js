@@ -7,11 +7,24 @@ async function applicantRegister(req,res){
   try{
     const {fullName, email, phone, jobType, location, domain} = req.body;
     for (let [key, value] of Object.entries({fullName, email, phone, jobType, location, domain})) if (!value) return res.status(400).json(new apiError(400,`${key} not available`,`${key} not available`));
+    const user = await Applicant.findOne({email});
+    if(user){
+      throw new apiError(400,"Applicant email already exists","Applicant email already exists")
+      return
+    }
     if(!req.file){
-      res.status(400).json(new apiError(400,"please submit resume","please submit resume"));
+      throw new apiError(400,"please submit resume","please submit resume");
+      return
     }
     // const resumeLocalPath = req.file?.path;
-    const resume = supabaseUrl(req.file,fullName);
+    const resume = await supabaseUrl(req.file,fullName);
+    console.log(fullName+
+      email+
+      phone+
+      jobType+
+      location+
+      domain+
+      resume)
 
     const newApplicant = await Applicant.create({
       fullName,
@@ -22,10 +35,14 @@ async function applicantRegister(req,res){
       domain,
       resume
     })
-    res.status(201).json(new apiResponse(201,"Application submitted",await Applicant.findById(newApplicant._id).select("-password -salt")));
+    console.log("after create")
+    res.status(201).json(new apiResponse(201,"Application submitted","Application submitted"));
+    return
   }catch(e){
-    res.status(500).json(new apiError(500,"Internal Server Error",e.message));
+    console.log(e)
+    res.status(500).json(new apiError(e.statusCode,"error",e.errors));
+    return
   }
 };
 
-module.exports = applicantRegister;
+module.exports = {applicantRegister};

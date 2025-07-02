@@ -11,7 +11,7 @@ const mongoose = require("mongoose");
 
 const applicantScheema = new  mongoose.Schema({
   fullName : {type:String, required:true},
-  email : {type:String, required:true},
+  email : {type:String, required:true, unique:true },
   phone : {type:String, required : true},
   jobType : {type:String, required:true, enum:["Job","Internship","Both"], default:"Both"},
   location : {type:String, required:true, enum:["WFH","In-Office", "Both"], default:"Both"},

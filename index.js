@@ -12,10 +12,10 @@ const applicantRouter = require("./Routes/applicant.route.js");
 const app = express();
 conectionDatabase();
 
-app.options('*', cors({
-  origin: process.env.FRONTEND,  
-  credentials: true
-}));
+// app.options('*', cors({
+//   origin: process.env.FRONTEND,  
+//   credentials: true
+// }));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

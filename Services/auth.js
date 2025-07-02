@@ -3,6 +3,7 @@ const JWT = require("jsonwebtoken")
 const secreteKey = process.env.JWT_SECRETE_KEY
 
 async function createToken(user){
+
  if(user.role == "Admin"){
   const payload ={
     _id : user._id,
