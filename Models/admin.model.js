@@ -5,7 +5,6 @@ const apiError = require("../Services/apiError");
 
 
 const adminSchema = new mongoose.Schema({
-  fullName : {type :  String, required : true},
   email : {type : String, required : true},
   password : {type:String, required:true},
   salt : {type:String,},
@@ -20,6 +19,7 @@ adminSchema.pre("save", async function (next) {
 
   this.salt = salt
   this.password = hashedPassword
+  next();
 })
 
 adminSchema.static("checkTokenForAdmin", async function (email, password) {
@@ -34,6 +34,6 @@ adminSchema.static("checkTokenForAdmin", async function (email, password) {
   return token
 })
 
-const Admin = mongoose.model("Admin", adminModel);
+const Admin = mongoose.model("Admin", adminSchema);
 
 module.exports = Admin
