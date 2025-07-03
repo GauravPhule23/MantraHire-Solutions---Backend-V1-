@@ -50,7 +50,7 @@ async function Login(req,res){
     }
     const token = await Admin.checkTokenForAdmin(email,password);
     
-      res.status(200).json(new apiResponse(200,token))
+      res.status(200).cookie("token",token).json(new apiResponse(200,token))
     
 
   }catch(e){

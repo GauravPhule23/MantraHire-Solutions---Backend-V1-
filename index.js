@@ -8,6 +8,7 @@ const { conectionDatabase } = require("./connection");
 
 const applicantRouter = require("./Routes/applicant.route.js");
 const authRouter = require("./Routes/auth.route.js");
+const dashboardRouter = require("./Routes/dashboard.route.js");
 
 
 
@@ -26,6 +27,7 @@ app.use(checkToken("token"));
 
 app.use("/api/v1/applicant", applicantRouter);
 app.use("/api/v1/auth/admin", authRouter);
+app.use("/api/v1/admin/dashboard", dashboardRouter);
 
 const port = process.env.PORT || 8000
 
