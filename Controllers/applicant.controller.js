@@ -18,13 +18,7 @@ async function applicantRegister(req, res) {
     }
     // const resumeLocalPath = req.file?.path;
     const resume = await supabaseUrl(req.file, fullName);
-    console.log(fullName +
-      email +
-      phone +
-      jobType +
-      location +
-      domain +
-      resume)
+
 
     const newApplicant = await Applicant.create({
       fullName,
@@ -35,16 +29,12 @@ async function applicantRegister(req, res) {
       domain,
       resume
     })
-    console.log("after create")
-     res.status(201).json({
-      statusCode: 201,
-      success: true,
-      message: "Application submitted",
-      data: newApplicant
-    });
+    
+     res.status(201).json(new apiResponse(201,newApplicant));
+    
     return
   } catch (e) {
-    console.log(e)
+    
     res.status(500).json(new apiError(e.statusCode, "error", e.errors));
     return
   }
