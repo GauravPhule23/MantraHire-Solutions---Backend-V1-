@@ -7,6 +7,8 @@ const { conectionDatabase } = require("./connection");
 
 
 const applicantRouter = require("./Routes/applicant.route.js");
+const authRouter = require("./Routes/auth.route.js");
+
 
 
 const app = express();
@@ -23,6 +25,7 @@ app.use(cookieParser());
 app.use(checkToken("token"));
 
 app.use("/api/v1/applicant", applicantRouter);
+app.use("/api/v1/auth/admin", authRouter);
 
 const port = process.env.PORT || 8000
 

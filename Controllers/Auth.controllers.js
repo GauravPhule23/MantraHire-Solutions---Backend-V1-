@@ -9,25 +9,30 @@ function isValidEmail(email) {
 
 async function SignUp(req, res) {
   try {
+    console.log("entered signup")
     const { email, password, role } = req.body;
+    console.log("bfr role check")
     if (role != "Admin") {
       res.status(400).json(new apiError(400, "No signup for applicants presently", "No signup for applicants presently"))
       return
     }
+    console.log("bfr email valid")
     if (!isValidEmail(email)) {
       res.status(400).json(400, "email not valid", "email not valid");
       return
     }
+    console.log("bfr count")
     if(!(process.env.MAX_ADMIN_COUNT > await Admin.countDocuments())){
       res.status(400).json(new apiError(400,"Admin count overflow","Admin count overflow"));
       return
     }
+    console.log("bfr creation")
     const newAdmin = await Admin.create({
       email,
       password,
       role
     })
-    const data = await Admin.findById(newAdmin._id).select("-password");
+    const data = await Admin.findById(newAdmin._id).select("-password -salt");
     res.status(201).json(new apiResponse(201,data));
     return
   } catch (e) {
