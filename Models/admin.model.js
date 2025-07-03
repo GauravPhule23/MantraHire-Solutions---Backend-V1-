@@ -5,10 +5,10 @@ const apiError = require("../Services/apiError");
 
 
 const adminSchema = new mongoose.Schema({
-  email : {type : String, required : true},
-  password : {type:String, required:true},
-  salt : {type:String,},
-  role : {type:String, enum:["Admin"], default:"Admin"}
+  email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
+  salt: { type: String, },
+  role: { type: String, enum: ["Admin"], default: "Admin" }
 })
 
 adminSchema.pre("save", async function (next) {
@@ -24,11 +24,11 @@ adminSchema.pre("save", async function (next) {
 
 adminSchema.static("checkTokenForAdmin", async function (email, password) {
   const admin = await this.findOne({ email })
-  if (!admin) throw new apiError(404,"No admin Found")
+  if (!admin) throw new apiError(404, "No admin Found")
   const salt = admin.salt
   const hashedPassword = admin.password
   const userPassword = createHmac("sha256", salt).update(password).digest("hex")
-  if (userPassword !== hashedPassword) throw new apiError(404,"Incorrect password","Incorrect password")
+  if (userPassword !== hashedPassword) throw new apiError(404, "Incorrect password", "Incorrect password")
   const token = await createToken(admin)
   console.log(token)
   return token
