@@ -5,8 +5,8 @@ const supabaseUrl = require("../Services/supabase")
 
 async function applicantRegister(req, res) {
   try {
-    const { fullName, email, phone, jobType, location, domain } = req.body;
-    for (let [key, value] of Object.entries({ fullName, email, phone, jobType, location, domain })) if (!value) return res.status(400).json(new apiError(400, `${key} not available`, `${key} not available`));
+    const { name, email, phone, jobType, locationType, workProfile } = req.body;
+    for (let [key, value] of Object.entries({ name, email, phone, jobType, locationType, workProfile })) if (!value) return res.status(400).json(new apiError(400, `${key} not available`, `${key} not available`));
     const user = await Applicant.findOne({ email });
     if (user) {
       res.status(400).json(new apiError(400, "Applicant email already exists", "Applicant email already exists"))
@@ -21,12 +21,12 @@ async function applicantRegister(req, res) {
 
 
     const newApplicant = await Applicant.create({
-      fullName,
+      fullName:name,
       email,
       phone,
       jobType,
-      location,
-      domain,
+      locationType,
+      workProfile,
       resume
     })
     
