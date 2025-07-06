@@ -2,7 +2,7 @@ const multer = require("multer")
 const path = require("path");
 
 const maxSize = 3 * 1024 * 1024; // 3MB (7,340,032 bytes)
-const uploadDir = path.join(__dirname, "../upload");
+const uploadDir = path.join(__dirname, "/tmp");
 
 
 const storage = multer.diskStorage({
