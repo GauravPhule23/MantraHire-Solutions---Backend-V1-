@@ -13,7 +13,13 @@ const dashboardRouter = require("./Routes/dashboard.route.js");
 
 
 const app = express();
-connectDB();
+const port = process.env.PORT || 8000
+connectDB().then(() => {
+  // start server only after DB is connected
+  app.listen(port, () => {
+    console.log(`🚀 Server running on ${port}`);
+  });
+});
 
 // app.options('*', cors({
 //   origin: process.env.FRONTEND,  
@@ -39,11 +45,10 @@ app.use("/api/v1/applicant", applicantRouter);
 app.use("/api/v1/auth/admin", authRouter);
 app.use("/api/v1/admin/dashboard", dashboardRouter);
 
-const port = process.env.PORT || 8000
 
-app.listen(port,()=>{
-  console.log(`server started at port ${port}`);
-});
+// app.listen(port,()=>{
+//   console.log(`server started at port ${port}`);
+// });
 
 
 
