@@ -27,6 +27,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(checkToken("token"));
 
+app.get("/", (req, res) => {
+  res.send("CORS is working!");
+});
+
 app.use("/api/v1/applicant", applicantRouter);
 app.use("/api/v1/auth/admin", authRouter);
 app.use("/api/v1/admin/dashboard", dashboardRouter);
