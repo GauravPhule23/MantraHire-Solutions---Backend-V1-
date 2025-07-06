@@ -5,6 +5,8 @@ const supabaseUrl = require("../Services/supabase")
 
 async function applicantRegister(req, res) {
   try {
+
+  console.log("inside controller")
     const { name, email, phone, jobType, locationType, workProfile } = req.body;
     for (let [key, value] of Object.entries({ name, email, phone, jobType, locationType, workProfile })) if (!value) return res.status(400).json(new apiError(400, `${key} not available`, `${key} not available`));
     const user = await Applicant.findOne({ email });
@@ -34,7 +36,8 @@ async function applicantRegister(req, res) {
     
     return
   } catch (e) {
-    
+    console.log(e)
+    console.log(e.message)
     res.status(500).json(new apiError(e.statusCode, "error", e.errors));
     return
   }
