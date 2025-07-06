@@ -15,11 +15,15 @@ const dashboardRouter = require("./Routes/dashboard.route.js");
 const app = express();
 conectionDatabase();
 
-app.options('*', cors({
-  origin: process.env.FRONTEND,  
-  credentials: true,
-  methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
-  allowedHeaders: "Content-Type, Authorization"
+// app.options('*', cors({
+//   origin: process.env.FRONTEND,  
+//   credentials: true,
+//   methods: "GET, HEAD, PUT, PATCH, POST, DELETE",
+//   allowedHeaders: "Content-Type, Authorization"
+// }));
+app.use(cors({
+  origin: process.env.FRONTEND,
+  credentials: true
 }));
 
 app.use(express.json());
