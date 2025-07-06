@@ -3,7 +3,7 @@ require('dotenv').config();
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const checkToken = require("./Middlewares/auth.middleware.js");
-const { conectionDatabase } = require("./connection");
+const { connectDB } = require("./connection");
 
 
 const applicantRouter = require("./Routes/applicant.route.js");
@@ -13,7 +13,7 @@ const dashboardRouter = require("./Routes/dashboard.route.js");
 
 
 const app = express();
-conectionDatabase();
+connectDB();
 
 // app.options('*', cors({
 //   origin: process.env.FRONTEND,  
