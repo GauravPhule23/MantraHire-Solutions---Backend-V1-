@@ -14,7 +14,7 @@ const applicantScheema = new  mongoose.Schema({
   email : {type:String, required:true, unique:true },
   phone : {type:String, required : true},
   jobType : {type:String, required:true, enum:["Job","Internship","Both"], default:"Both"},
-  locationType : {type:String, required:true, enum:["WFH","In-Office", "Both"], default:"Both"},
+  locationType : {type:String, required:true, enum:["WFH","In-office", "Both"], default:"Both"},
   resume : {type:String, required:true},
   workProfile : {type:String, required:true}
 })
