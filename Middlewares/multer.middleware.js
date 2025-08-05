@@ -1,21 +1,19 @@
-const multer = require("multer")
-const path = require("path");
+const multer = require("multer");
 
-const maxSize = 3 * 1024 * 1024; // 3MB (7,340,032 bytes)
-// const uploadDir = path.join(__dirname,"/tmp");
+const maxSize = 3 * 1024 * 1024; // 3MB
 
+const storage = multer.memoryStorage(); // ✅ store in memory as buffer
 
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null,"/tmp")
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname)
-  }
-})
-
-const upload = multer({ 
+const upload = multer({
   storage,
-  limits: { fileSize: maxSize /* bytes */ }
- })
-module.exports = upload
+  limits: { fileSize: maxSize },
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype === "application/pdf") {
+      cb(null, true);
+    } else {
+      cb(new Error("Only PDF files are allowed!"));
+    }
+  },
+});
+
+module.exports = upload;

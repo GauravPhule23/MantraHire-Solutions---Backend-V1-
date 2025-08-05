@@ -19,8 +19,9 @@ async function applicantRegister(req, res) {
       return
     }
     // const resumeLocalPath = req.file?.path;
-    const resume = await supabaseUrl(req.file, name);
-
+    const resume = req.file.buffer;
+    console.log(req.file.buffer);
+    console.log(resume);
 
     const newApplicant = await Applicant.create({
       fullName:name,
